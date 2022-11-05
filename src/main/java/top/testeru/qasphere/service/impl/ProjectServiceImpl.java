@@ -1,23 +1,21 @@
-package top.testeru.testerusphere.service.impl;
+package top.testeru.qasphere.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.testeru.testerusphere.converter.TestCaseConverter;
-import top.testeru.testerusphere.dao.TestCaseMapper;
-import top.testeru.testerusphere.dto.TestCaseDto;
-import top.testeru.testerusphere.entity.TestCase;
-import top.testeru.testerusphere.service.ProjectService;
-import top.testeru.testerusphere.util.R;
+import top.testeru.qasphere.converter.TestCaseConverter;
+import top.testeru.qasphere.dao.TestCaseMapper;
+import top.testeru.qasphere.dto.TestCaseDto;
+import top.testeru.qasphere.entity.TestCase;
+import top.testeru.qasphere.service.ProjectService;
+import top.testeru.qasphere.util.R;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author testeru.top
  * @version 1.0.0
- * @Project testerusphere
+ * @Project qasphere
  * @Description
  * @createTime 2022年11月04日 18:58:00
  */

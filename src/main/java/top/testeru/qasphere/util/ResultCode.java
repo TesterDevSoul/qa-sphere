@@ -1,4 +1,4 @@
-package top.testeru.testerusphere.util;
+package top.testeru.qasphere.util;
 /**
  * @author testeru.top
  * @version 1.0.0

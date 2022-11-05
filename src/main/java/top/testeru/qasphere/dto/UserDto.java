@@ -1,4 +1,4 @@
-package top.testeru.testerusphere.dto;
+package top.testeru.qasphere.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

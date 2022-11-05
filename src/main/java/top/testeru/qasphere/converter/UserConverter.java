@@ -1,14 +1,11 @@
-package top.testeru.testerusphere.converter;
+package top.testeru.qasphere.converter;
 
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-
-import top.testeru.testerusphere.dto.UserDto;
-import top.testeru.testerusphere.entity.User;
-
-import static org.mapstruct.InjectionStrategy.CONSTRUCTOR;
+import top.testeru.qasphere.dto.UserDto;
+import top.testeru.qasphere.entity.User;
 
 /**
  * @author testeru.top

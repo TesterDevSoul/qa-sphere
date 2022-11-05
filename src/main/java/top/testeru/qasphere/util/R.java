@@ -1,4 +1,4 @@
-package top.testeru.testerusphere.util;
+package top.testeru.qasphere.util;
 
 import java.io.Serializable;
 import java.util.HashMap;

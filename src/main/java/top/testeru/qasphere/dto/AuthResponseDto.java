@@ -10,6 +10,7 @@ package top.testeru.qasphere.dto;
 
 public class AuthResponseDto {
     private static final long serialVersionUID = -8752513311904244663L;
+    private String name;
 
     private  String accessToken;
 
@@ -22,10 +23,27 @@ public class AuthResponseDto {
         this.accessToken = accessToken;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public AuthResponseDto() {
+    }
+
+    public AuthResponseDto(String name, String accessToken) {
+        this.name = name;
+        this.accessToken = accessToken;
+    }
+
     @Override
     public String toString() {
-        return "TokenDto{" +
-                "accessToken='" + accessToken + '\'' +
+        return "AuthResponseDto{" +
+                "name='" + name + '\'' +
+                ", accessToken='" + accessToken + '\'' +
                 '}';
     }
 }

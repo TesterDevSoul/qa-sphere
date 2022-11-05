@@ -1,17 +1,17 @@
-package top.testeru.testerusphere.service;
+package top.testeru.qasphere.service;
 
-import top.testeru.testerusphere.dto.TokenDto;
-import top.testeru.testerusphere.dto.UserDto;
+import top.testeru.qasphere.dto.AuthReqestDto;
+import top.testeru.qasphere.dto.AuthResponseDto;
 
 /**
  * @author testeru.top
  * @version 1.0.0
- * @Project testerusphere
+ * @Project qasphere
  * @Description
  * @createTime 2022年11月04日 16:13:00
  */
 public interface AuthenticationService {
-    public TokenDto login(UserDto userLoginDto);
+    public AuthResponseDto login(AuthReqestDto authReqestDto);
 
 
 }

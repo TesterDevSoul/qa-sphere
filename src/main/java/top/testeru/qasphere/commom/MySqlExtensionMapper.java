@@ -1,4 +1,4 @@
-package top.testeru.qasphere.dao;
+package top.testeru.qasphere.commom;
 
 import tk.mybatis.mapper.common.IdsMapper;
 import tk.mybatis.mapper.common.Mapper;

@@ -1,43 +1,38 @@
-package top.testeru.testerusphere.service.impl;
+package top.testeru.qasphere.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import top.testeru.testerusphere.converter.UserConverter;
-import top.testeru.testerusphere.dao.UserMapper;
-import top.testeru.testerusphere.dto.TokenDto;
-import top.testeru.testerusphere.dto.UserDto;
-import top.testeru.testerusphere.entity.User;
-import top.testeru.testerusphere.service.AuthenticationService;
-import top.testeru.testerusphere.service.UserService;
-import top.testeru.testerusphere.util.JWTUtils;
+import top.testeru.qasphere.dto.AuthReqestDto;
+import top.testeru.qasphere.dto.AuthResponseDto;
+import top.testeru.qasphere.entity.User;
+import top.testeru.qasphere.service.AuthenticationService;
+import top.testeru.qasphere.service.UserService;
+import top.testeru.qasphere.security.jwt.JWTUtils;
 
 import javax.annotation.Resource;
 
 /**
  * @author testeru.top
  * @version 1.0.0
- * @Project testerusphere
+ * @Project qasphere
  * @Description
  * @createTime 2022年11月04日 16:14:00
  */
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Resource
-    UserConverter userConverter;
-    @Resource
     UserService userService;
     @Resource
     JWTUtils jwtUtil;
 
     @Override
-    public TokenDto login(UserDto userLoginDto) {
+    public AuthResponseDto login(AuthReqestDto authReqestDto) {
 
-        System.out.println("TokenSuccessResponseDto - login:" + userLoginDto);
-        User user = userConverter.userDtoForUser(userLoginDto);
+//        System.out.println("TokenSuccessResponseDto - login:" + authReqestDto);
+//        User user = userConverter.userDtoForUser(userLoginDto);
 //        UserDto userDto = null;
-        final User endUser = userService.selectOneFromUser(user)
+        final User endUser = userService.selectByName(authReqestDto.getUsername())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid login credentials provided"));
         //生成token
 
@@ -48,9 +43,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 //        final var accessToken = jwtUtil.generateAccessToken(endUser);
 //        final var refreshToken = jwtUtil.generateRefreshToken(endUser);
 //        final var accessTokenExpirationTimestamp = jwtUtil.extractExpirationTimestamp(accessToken);
-        TokenDto tokenDto = new TokenDto();
+//        TokenDto tokenDto = new TokenDto();
 //        tokenDto.setAccessToken(accessToken);
-        return tokenDto;
+        return null;
 
 
     }

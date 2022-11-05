@@ -1,4 +1,4 @@
-package top.testeru.testerusphere.entity;
+package top.testeru.qasphere.entity;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -172,5 +172,19 @@ public class User extends BaseEntityNew {
      */
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", status=" + status +
+                '}';
     }
 }

@@ -1,9 +1,6 @@
-package top.testeru.testerusphere.dto;
+package top.testeru.qasphere.dto;
 
 import io.swagger.annotations.ApiModel;
-
-import javax.persistence.Column;
-import java.util.Date;
 
 /**
  * @author testeru.top

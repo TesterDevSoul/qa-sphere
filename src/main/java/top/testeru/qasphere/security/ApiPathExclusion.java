@@ -1,10 +1,8 @@
-package top.testeru.testerusphere.security.constant;
+package top.testeru.qasphere.security;
 
 
 
 //不进行security校验的API
-
-
 public class ApiPathExclusion {
 
     public ApiPathExclusion() {

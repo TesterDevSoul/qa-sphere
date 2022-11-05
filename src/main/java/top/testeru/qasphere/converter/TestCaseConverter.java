@@ -1,20 +1,17 @@
-package top.testeru.testerusphere.converter;
+package top.testeru.qasphere.converter;
 
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
-import top.testeru.testerusphere.dto.TestCaseDto;
-import top.testeru.testerusphere.entity.TestCase;
+import top.testeru.qasphere.dto.TestCaseDto;
+import top.testeru.qasphere.entity.TestCase;
 
 
 /**
  * @author testeru.top
  * @version 1.0.0
- * @Project testerusphere
+ * @Project qasphere
  * @Description
  * @createTime 2022年11月04日 19:01:00
  */

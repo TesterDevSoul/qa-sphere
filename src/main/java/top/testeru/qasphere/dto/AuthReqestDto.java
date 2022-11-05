@@ -8,29 +8,29 @@ package top.testeru.qasphere.dto;
  * @createTime 2022年11月05日 13:15:00
  */
 public class AuthReqestDto {
-    private String name;
+    private String username;
 
     private String password;
 
     @Override
     public String toString() {
         return "AuthReqestDto{" +
-                "name='" + name + '\'' +
+                "name='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
 
-    public AuthReqestDto(String name, String password) {
-        this.name = name;
+    public AuthReqestDto(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

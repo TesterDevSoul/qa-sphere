@@ -1,4 +1,4 @@
-package top.testeru.testerusphere.security.service;
+package top.testeru.qasphere.security;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import top.testeru.testerusphere.dto.UserDto;
-import top.testeru.testerusphere.service.UserService;
+import top.testeru.qasphere.entity.User;
+import top.testeru.qasphere.service.UserService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -24,18 +24,12 @@ import java.util.Collection;
 @Service
 public class CustomUserDetailService implements UserDetailsService {
     @Resource
-	UserService userService;
+    UserService userService;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDto userParm = new UserDto();
-        userParm.setUsername(username);
-        System.out.println(username);
-        System.out.println(userParm);
-
-        UserDto user = userService.selectOne(userParm)
-                    .orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid login credentials provided"));
-
+        User user = userService.selectByName(username)
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.UNAUTHORIZED, "没有登录权限"));
         System.out.println(user);
         if(null == user){
             throw new UsernameNotFoundException("用户没有找到" + username);// 用户名没有找到
@@ -43,8 +37,6 @@ public class CustomUserDetailService implements UserDetailsService {
         // 先声明一个权限集合, 因为构造方法里面不能传入null
         Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
 
-//        String username, String password, boolean enabled, boolean accountNonExpired,
-//        boolean credentialsNonExpired, boolean accountNonLocked,
         UserDetails userDetails =
                 new org.springframework.security.core.userdetails.User(username,
                         "{bcrypt}" + user.getPassword(),//不使用密码加密 noop代表不加密

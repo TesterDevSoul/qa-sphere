@@ -1,4 +1,4 @@
-package top.testeru.testerusphere.entity;
+package top.testeru.qasphere.entity;
 
 import java.io.Serializable;
 
