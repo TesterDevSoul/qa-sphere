@@ -33,12 +33,4 @@ public interface UserConverter {
             @Mapping(target = "email",source = "email")
     })
     public UserDto userForUserDto(User user);
-
-
-//    @Mappings({
-//            @Mapping(target = "username",source = "username"),
-//            @Mapping(target = "password",source = "password")
-//    })
-//    public User userLoginDtoForUser(UserLoginDto userLoginDto);
-
 }

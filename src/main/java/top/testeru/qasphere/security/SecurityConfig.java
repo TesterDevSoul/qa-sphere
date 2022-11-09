@@ -20,6 +20,7 @@ import top.testeru.qasphere.security.jwt.JWTTokenFilter;
 import top.testeru.qasphere.service.UserService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -48,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //身份验证管理器 -- 配置用户登录信息，就是前面自动注入的service类
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //用户详细信息服务中心
         auth.userDetailsService(customUserDetailService);
     }
 
@@ -69,6 +71,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .cors(withDefaults())
             .csrf().disable()
             .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED,authException.getMessage());
+                })
         .and()
             // 既然启用 JWT, 那就彻底点, 不需要 Session
             .sessionManagement()

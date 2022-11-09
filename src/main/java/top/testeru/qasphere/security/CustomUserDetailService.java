@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import top.testeru.qasphere.dto.UserDto;
 import top.testeru.qasphere.entity.User;
 import top.testeru.qasphere.service.UserService;
 
@@ -27,7 +28,7 @@ public class CustomUserDetailService implements UserDetailsService {
     UserService userService;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.selectByName(username)
+        UserDto user = userService.selectByName(username)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.UNAUTHORIZED, "没有登录权限"));
         System.out.println(user);

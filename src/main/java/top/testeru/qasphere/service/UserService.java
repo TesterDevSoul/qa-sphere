@@ -14,7 +14,6 @@ import java.util.Optional;
  * @createTime 2022年11月04日 16:35:00
  */
 public interface UserService {
-    Optional<User> selectByName(String UserName);
-
+    Optional<UserDto> selectByName(String UserName);
 
 }

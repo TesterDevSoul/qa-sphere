@@ -84,7 +84,7 @@ public class JWTTokenFilter extends OncePerRequestFilter {
             return false;
         return true;
     }
-    String getAccessToken(HttpServletRequest req){
+    private String getAccessToken(HttpServletRequest req){
         String header = req.getHeader("Authorization");
         String token = header.split(" ")[1].trim();
         System.out.println("token:"+token);
