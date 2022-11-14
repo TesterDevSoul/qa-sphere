@@ -23,7 +23,6 @@ public class UserDto {
      * 密码
      */
     @ApiModelProperty(value = "密码",example = "admin",required = true)
-
     private String password;
 
     /**

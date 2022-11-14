@@ -38,7 +38,9 @@ public class ApiPathExclusion {
 	public enum PostApiPathExclusion {
 
 		SIGN_UP("/user/all"),
-		LOGIN("/auth/login");
+		LOGIN("/auth/login"),
+        REGISTER("/auth/register");
+
 
 		private final String path;
 

@@ -35,7 +35,10 @@ public class JWTTokenFilter extends OncePerRequestFilter {
 
     //重写实际进行过滤操作的doFilterInternal抽象方法
     @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest httpServletRequest,
+                                    HttpServletResponse httpServletResponse,
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
 
 
         //尝试获取TOKEN
@@ -49,13 +52,20 @@ public class JWTTokenFilter extends OncePerRequestFilter {
         System.out.println(accessToken);
         //如果accessToken不正确则直接跳转
         if (!jwtUtils.validateAccessToken(accessToken)) {
+            System.out.println("accessToken不正确");
             filterChain.doFilter(httpServletRequest, httpServletResponse);
             return;
         }
-        //token令牌验证成功
-        setAuthorizationContext(accessToken,httpServletRequest);
-        filterChain.doFilter(httpServletRequest, httpServletResponse);
+        try {
+            //token令牌验证成功
+            setAuthorizationContext(accessToken,httpServletRequest);
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+        }catch (Exception e){
+            System.out.println("error:" + e);
+        }
     }
+
+
 
     private void setAuthorizationContext(String accessToken, HttpServletRequest httpServletRequest) {
         User userDetails = getUserDetails(accessToken);

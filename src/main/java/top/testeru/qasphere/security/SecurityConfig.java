@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -15,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import top.testeru.qasphere.security.jwt.JWTTokenFilter;
 import top.testeru.qasphere.service.UserService;
@@ -37,6 +40,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     JWTTokenFilter jwtTokenFilter;
+//    @Resource
+//    RestAuthenticationFailureHandler restAuthenticationFailureHandler;
     //加密方式声明
 //    @Bean
 //    public PasswordEncoder passwordEncoder() {
@@ -44,20 +49,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    }
 
 
+
     @Resource
     CustomUserDetailService customUserDetailService;
     //身份验证管理器 -- 配置用户登录信息，就是前面自动注入的service类
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        //用户详细信息服务中心
+//        auth.userDetailsService(customUserDetailService);
+//    }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //用户详细信息服务中心
-        auth.userDetailsService(customUserDetailService);
+        auth.authenticationProvider(daoAuthenticationProvider());
     }
-
 
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
+    }
+    @Bean
+    public AuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setUserDetailsService(customUserDetailService);
+//        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setHideUserNotFoundExceptions(false);
+        return daoAuthenticationProvider;
     }
 
 
@@ -72,7 +89,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .csrf().disable()
             .exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) -> {
+                    System.out.println("authException:"+authException);
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED,authException.getMessage());
+
+
                 })
         .and()
             // 既然启用 JWT, 那就彻底点, 不需要 Session
@@ -89,6 +109,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
         .and()
                 .addFilterAt(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
+
         ;
 
 

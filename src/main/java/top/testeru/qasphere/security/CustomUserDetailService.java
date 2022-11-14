@@ -28,12 +28,14 @@ public class CustomUserDetailService implements UserDetailsService {
     UserService userService;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDto user = userService.selectByName(username)
-                .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.UNAUTHORIZED, "没有登录权限"));
-        System.out.println(user);
+        System.out.println("loadUserByUsername");
+//        UserDto user1 = new UserDto();
+        UserDto user = userService.selectByName(username);
+
+        System.out.println("user:"+user);
         if(null == user){
-            throw new UsernameNotFoundException("用户没有找到" + username);// 用户名没有找到
+            System.out.println("用户没有找到");
+            throw new UsernameNotFoundException("用户没有找到：" + username);// 用户名没有找到
         }
         // 先声明一个权限集合, 因为构造方法里面不能传入null
         Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
