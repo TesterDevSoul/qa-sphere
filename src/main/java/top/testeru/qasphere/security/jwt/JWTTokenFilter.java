@@ -72,6 +72,7 @@ public class JWTTokenFilter extends OncePerRequestFilter {
         user.setId(Integer.parseInt(subjectArray[0]));
         user.setUsername(subjectArray[1]);
         return user;
+        
 
     }
 
